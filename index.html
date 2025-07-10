@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full Stack Developer Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .text-gradient {
+      background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .bg-glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    html.dark .bg-glass {
+      background: rgba(17, 24, 39, 0.5);
+    }
+    .active-section {
+      color: #8b5cf6;
+      border-bottom: 2px solid #8b5cf6;
+    }
+    section {
+      min-height: 100vh;
+      padding-top: 80px;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+  </style>
+  <script>
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+  </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans transition-all duration-300">
+  
+  <nav class="bg-glass fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <span class="text-xl font-bold text-gradient">DevPortfolio</span>
+        </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#home" class="nav-link text-gray-800 dark:text-gray-100 hover:text-purple-500 dark:hover:text-purple-400 transition active-section">Home</a>
+          <a href="#skills" class="nav-link text-gray-800 dark:text-gray-100 hover:text-purple-500 dark:hover:text-purple-400 transition">Skills</a>
+          <a href="#experience" class="nav-link text-gray-800 dark:text-gray-100 hover:text-purple-500 dark:hover:text-purple-400 transition">Experience</a>
+          <a href="#employment" class="nav-link text-gray-800 dark:text-gray-100 hover:text-purple-500 dark:hover:text-purple-400 transition">Employment</a>
+          <a href="#works" class="nav-link text-gray-800 dark:text-gray-100 hover:text-purple-500 dark:hover:text-purple-400 transition">Works</a>
+          <a href="#contact" class="nav-link text-gray-800 dark:text-gray-100 hover:text-purple-500 dark:hover:text-purple-400 transition">Contact</a>
+          <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5">
+              <i id="theme-toggle-dark-icon" class="hidden fas fa-moon text-lg"></i>
+              <i id="theme-toggle-light-icon" class="hidden fas fa-sun text-lg"></i>
+          </button>
+        </div>
+        <div class="md:hidden flex items-center">
+          <button id="menu-btn" class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white focus:outline-none">
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
+        <a href="#home" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200 dark:hover:bg-gray-700">Home</a>
+        <a href="#skills" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200 dark:hover:bg-gray-700">Skills</a>
+        <a href="#experience" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200 dark:hover:bg-gray-700">Experience</a>
+        <a href="#employment" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200 dark:hover:bg-gray-700">Employment</a>
+        <a href="#works" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200 dark:hover:bg-gray-700">Works</a>
+        <a href="#contact" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200 dark:hover:bg-gray-700">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <section id="home" class="flex items-center justify-center px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h1 class="text-4xl md:text-6xl font-bold mb-4">Hi, I'm <span id="profile-name" class="text-gradient">John Doe</span></h1>
+        <h2 id="profile-headline" class="text-2xl md:text-3xl font-semibold mb-6 text-purple-600 dark:text-purple-300">Full Stack Web Developer</h2>
+        <p id="profile-bio" class="text-gray-600 dark:text-gray-300 mb-8 text-lg"></p>
+        <div class="flex flex-wrap gap-4">
+          <a id="cv-link" href="#" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg hover:shadow-xl flex items-center">
+            <i class="fas fa-download mr-2"></i> DOWNLOAD CV
+          </a>
+          <a href="#contact" class="nav-link border border-purple-500 text-purple-500 dark:text-purple-400 hover:bg-purple-500 hover:text-white dark:hover:bg-purple-900/30 font-bold py-3 px-6 rounded-lg transition-all shadow-lg hover:shadow-xl">
+            Contact Me
+          </a>
+        </div>
+        <div class="flex mt-8 space-x-4">
+          <a id="github-link" href="#" target="_blank" rel="noopener noreferrer" class="text-gray-500 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 text-xl transition"><i class="fab fa-github"></i></a>
+          <a id="linkedin-link" href="#" target="_blank" rel="noopener noreferrer" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 text-xl transition"><i class="fab fa-linkedin"></i></a>
+          <a id="instagram-link" href="#" target="_blank" rel="noopener noreferrer" class="text-gray-500 dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-500 text-xl transition"><i class="fab fa-instagram"></i></a>
+          <a id="twitter-link" href="#" target="_blank" rel="noopener noreferrer" class="text-gray-500 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 text-xl transition"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="hidden md:flex justify-center">
+        <div class="relative floating">
+          <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl opacity-50 blur"></div>
+          <img id="profile-image" src="" alt="Developer" class="relative w-80 h-80 object-cover rounded-2xl bg-gray-200 dark:bg-gray-800">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">My <span class="text-gradient">Skills</span></h2>
+        <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto"></div>
+      </div>
+      <div id="skills-grid" class="grid grid-cols-2 md:grid-cols-4 gap-6"></div>
+    </div>
+  </section>
+
+  <section id="experience" class="py-20 bg-gray-50 dark:bg-gray-800/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">My <span class="text-gradient">Experience</span></h2>
+        <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto"></div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="border-l-2 border-purple-500 pl-8 relative">
+          <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-purple-500"></div>
+          <h3 class="text-2xl font-bold mb-6">Education</h3>
+          <div id="education-timeline"></div>
+        </div>
+        <div class="border-l-2 border-blue-500 pl-8 relative">
+          <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-500"></div>
+          <h3 class="text-2xl font-bold mb-6">Certifications</h3>
+          <div id="certifications-timeline"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="employment" class="py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Employment <span class="text-gradient">History</span></h2>
+        <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto"></div>
+      </div>
+      <div id="employment-history" class="space-y-8"></div>
+    </div>
+  </section>
+
+  <section id="works" class="py-20 bg-gray-50 dark:bg-gray-800/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">My <span class="text-gradient">Works</span></h2>
+        <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto"></div>
+      </div>
+      <div id="works-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </div>
+  </section>
+  
+  <section id="contact" class="py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Get In <span class="text-gradient">Touch</span></h2>
+        <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto"></div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+          <form id="contact-form" action="https://formspree.io/f/mkgbdobd" method="POST" class="space-y-6">
+            <div>
+              <label for="form-name" class="block text-sm font-medium text-gray-500 dark:text-gray-300 mb-2">Name</label>
+              <input type="text" id="form-name" name="name" required class="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition">
+            </div>
+            <div>
+              <label for="form-email" class="block text-sm font-medium text-gray-500 dark:text-gray-300 mb-2">Email</label>
+              <input type="email" id="form-email" name="email" required class="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition">
+            </div>
+            <div>
+              <label for="form-subject" class="block text-sm font-medium text-gray-500 dark:text-gray-300 mb-2">Subject</label>
+              <input type="text" id="form-subject" name="subject" required class="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition">
+            </div>
+            <div>
+              <label for="form-message" class="block text-sm font-medium text-gray-500 dark:text-gray-300 mb-2">Message</label>
+              <textarea id="form-message" name="message" rows="5" required class="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg hover:shadow-xl">Send Message</button>
+            <p id="form-success" class="text-green-500 hidden mt-4">Message sent successfully!</p>
+            <p id="form-error" class="text-red-500 hidden mt-4">Something went wrong. Please try again.</p>
+          </form>
+        </div>
+        <div>
+          <div class="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-8 h-full shadow-sm">
+            <h3 class="text-xl font-bold mb-6">Contact Information</h3>
+            <div id="contact-info" class="space-y-6">
+             
+<div class="pt-2">
+  <h4 class="font-medium mb-4">Follow Me</h4>
+  <div class="flex space-x-4">
+    <a href="www.linkedin.com/in/ahmed-oukacha" class="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-blue-600 text-gray-800 dark:text-white flex items-center justify-center transition">
+      <i class="fab fa-linkedin-in"></i>
+    </a>
+    <a href="https://github.com/Ahmed-oukacha" class="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-gray-600 text-gray-800 dark:text-white flex items-center justify-center transition">
+      <i class="fab fa-github"></i>
+    </a>
+    <a href="#" class="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-blue-400 text-gray-800 dark:text-white flex items-center justify-center transition">
+      <i class="fab fa-twitter"></i>
+    </a>
+    <a href="#" class="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-red-500 text-gray-800 dark:text-white flex items-center justify-center transition">
+      <i class="fab fa-youtube"></i>
+    </a>
+  </div>
+</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-gray-200 dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <p id="footer-copyright" class="text-gray-600 dark:text-gray-400">© 2023 John Doe. All rights reserved.</p>
+        </div>
+        <div id="footer-socials" class="flex space-x-6"></div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.skypack.dev/@sanity/client';
+
+    const client = createClient({
+        projectId: '265rkko9', 
+        dataset: 'production',
+        useCdn: true, // Use `true` in production for faster loads
+        apiVersion: '2025-07-10',
+    });
+
+    async function fetchProfileData() {
+        const query = `*[_type == "profile" && _id == "profileInfo"][0]{ 
+            ..., 
+            "imageUrl": profileImage.asset->url, 
+            "resumeUrl": resume.asset->url
+        }`;
+        try {
+            const profile = await client.fetch(query);
+            if (!profile) return;
+            
+            document.getElementById('profile-name').innerText = profile.name || '';
+            document.getElementById('footer-copyright').innerText = `© ${new Date().getFullYear()} ${profile.name || ''}. All rights reserved.`;
+            document.getElementById('profile-headline').innerText = profile.headline || '';
+            document.getElementById('profile-bio').innerText = profile.bio || '';
+            if (profile.imageUrl) document.getElementById('profile-image').src = profile.imageUrl;
+            if (profile.resumeUrl) document.getElementById('cv-link').href = profile.resumeUrl;
+
+            const contactInfoContainer = document.getElementById('contact-info');
+            if (contactInfoContainer) {
+              contactInfoContainer.innerHTML = `
+                <div class="flex items-start"><div class="text-purple-500 dark:text-purple-400 text-xl mt-1 mr-4"><i class="fas fa-map-marker-alt"></i></div><div><h4 class="font-medium">Location</h4><p class="text-gray-600 dark:text-gray-300">${profile.location || ''}</p></div></div>
+                <div class="flex items-start"><div class="text-blue-500 dark:text-blue-400 text-xl mt-1 mr-4"><i class="fas fa-envelope"></i></div><div><h4 class="font-medium">Email</h4><p class="text-gray-600 dark:text-gray-300">${profile.email || ''}</p></div></div>
+                <div class="flex items-start"><div class="text-green-500 dark:text-green-400 text-xl mt-1 mr-4"><i class="fas fa-phone-alt"></i></div><div><h4 class="font-medium">Phone</h4><p class="text-gray-600 dark:text-gray-300">${profile.phone || ''}</p></div></div>
+                <div class="pt-2"><h4 class="font-medium mb-4">Follow Me</h4><div class="flex space-x-4" id="contact-socials"></div></div>`;
+            }
+
+            const heroSocials = {'github-link': profile.githubURL, 'linkedin-link': profile.linkedinURL, 'instagram-link': profile.instagramURL, 'twitter-link': profile.twitterURL };
+            for (const id in heroSocials) {
+                const el = document.getElementById(id);
+                if (el) { el.style.display = heroSocials[id] ? (el.href = heroSocials[id], 'inline-flex') : 'none'; }
+            }
+
+            const contactSocialsContainer = document.getElementById('contact-socials');
+            const footerSocialsContainer = document.getElementById('footer-socials');
+            if(contactSocialsContainer) contactSocialsContainer.innerHTML = '';
+            if(footerSocialsContainer) footerSocialsContainer.innerHTML = '';
+            
+            const socialLinksForLoop = { linkedin: { href: profile.linkedinURL, icon: 'fab fa-linkedin-in', color: 'blue-600' }, github: { href: profile.githubURL, icon: 'fab fa-github', color: 'gray-600' }, twitter: { href: profile.twitterURL, icon: 'fab fa-twitter', color: 'blue-400' }, instagram: { href: profile.instagramURL, icon: 'fab fa-instagram', color: 'red-500' } };
+            for (const key in socialLinksForLoop) {
+              const link = socialLinksForLoop[key];
+              if (link.href) {
+                if(contactSocialsContainer) { contactSocialsContainer.innerHTML += `<a href="${link.href}" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-${link.color} text-gray-800 dark:text-white flex items-center justify-center transition"><i class="${link.icon}"></i></a>`; }
+                if(footerSocialsContainer) { footerSocialsContainer.innerHTML += `<a href="${link.href}" target="_blank" rel="noopener noreferrer" class="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition"><i class="fab fa-${key}"></i></a>`; }
+              }
+            }
+        } catch (error) { console.error('Failed to fetch profile data:', error); }
+    }
+    
+    async function fetchSkillsData() {
+        const skillsGrid = document.getElementById('skills-grid');
+        if (!skillsGrid) return;
+        const query = `*[_type == "skill"] | order(order asc){ title, icon, skills }`;
+        try {
+            const categories = await client.fetch(query);
+            skillsGrid.innerHTML = '';
+            categories.forEach(category => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:border-purple-500 transition shadow-sm';
+                const skillsList = (category.skills || []).map(skill => `<li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2 text-sm"></i> ${skill}</li>`).join('');
+                categoryDiv.innerHTML = `<div class="text-purple-500 dark:text-purple-400 text-4xl mb-4"><i class="${category.icon || 'fas fa-star'}"></i></div><h3 class="text-xl font-semibold mb-3">${category.title}</h3><ul class="space-y-2 text-gray-600 dark:text-gray-300">${skillsList}</ul>`;
+                skillsGrid.appendChild(categoryDiv);
+            });
+        } catch (error) { console.error('Failed to fetch skills data:', error); }
+    }
+
+    async function fetchExperienceData() {
+        const educationTimeline = document.getElementById('education-timeline');
+        const certificationsTimeline = document.getElementById('certifications-timeline');
+        if (!educationTimeline || !certificationsTimeline) return;
+        const query = `*[_type == "experience"] | order(order asc){ title, institution, dateRange, description, category }`;
+        try {
+            const experiences = await client.fetch(query);
+            educationTimeline.innerHTML = '';
+            certificationsTimeline.innerHTML = '';
+            experiences.forEach(exp => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'relative mb-8 pl-8';
+                const colorClass = exp.category === 'education' ? 'blue' : 'purple';
+                itemDiv.innerHTML = `<div class="absolute left-0 top-1 w-3 h-3 rounded-full bg-${colorClass}-400"></div><div class="absolute left-[5px] top-1 bottom-0 w-0.5 bg-gradient-to-b from-${colorClass}-400 to-transparent"></div><h4 class="text-xl font-semibold">${exp.title}</h4><p class="text-purple-600 dark:text-purple-300">${exp.institution} • ${exp.dateRange}</p><p class="text-gray-600 dark:text-gray-300 mt-2">${exp.description}</p>`;
+                if (exp.category === 'education') { educationTimeline.appendChild(itemDiv); } 
+                else if (exp.category === 'certification') { certificationsTimeline.appendChild(itemDiv); }
+            });
+        } catch(error) { console.error("Failed to fetch experience data:", error); }
+    }
+
+    async function fetchEmploymentData() {
+        const historyContainer = document.getElementById('employment-history');
+        if (!historyContainer) return;
+        const query = `*[_type == "employment"] | order(order desc){ jobTitle, company, dateRange, description, tags }`;
+        try {
+            const jobs = await client.fetch(query);
+            historyContainer.innerHTML = '';
+            jobs.forEach(job => {
+                const jobDiv = document.createElement('div');
+                jobDiv.className = 'bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:border-purple-500 transition group shadow-sm';
+                const tagsList = (job.tags || []).map(tag => `<span class="bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 px-3 py-1 rounded-full text-sm">${tag}</span>`).join('');
+                jobDiv.innerHTML = `<div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4"><div><h3 class="text-xl font-bold mb-1 group-hover:text-purple-500 dark:group-hover:text-purple-400 transition">${job.jobTitle}</h3><p class="text-purple-600 dark:text-purple-300">${job.company}</p></div><div class="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-4 py-1 rounded-full font-medium text-sm">${job.dateRange}</div></div><p class="text-gray-600 dark:text-gray-300 mt-4">${job.description}</p><div class="mt-4 flex flex-wrap gap-2">${tagsList}</div>`;
+                historyContainer.appendChild(jobDiv);
+            });
+        } catch (error) { console.error("Failed to fetch employment data:", error); }
+    }
+    
+    async function fetchWorksData() {
+        const worksGrid = document.getElementById('works-grid');
+        if (!worksGrid) return;
+        const query = `*[_type == "work"] | order(order asc){ title, description, projectLink, "imageUrl": projectImage.asset->url, tags }`;
+        try {
+            const works = await client.fetch(query);
+            worksGrid.innerHTML = '';
+            works.forEach(work => {
+                const workDiv = document.createElement('div');
+                workDiv.className = 'group relative overflow-hidden rounded-xl shadow-md bg-white dark:bg-gray-900';
+                const tagsList = (work.tags || []).map(tag => `<span class="bg-blue-400/50 dark:bg-blue-900/40 text-white dark:text-blue-300 px-2 py-1 rounded-full text-xs">${tag}</span>`).join(' ');
+                workDiv.innerHTML = `<img src="${work.imageUrl || ''}" alt="${work.title}" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110"><div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent flex flex-col justify-end p-6 transition duration-300"><h3 class="text-xl font-bold text-white">${work.title}</h3><p class="text-gray-200 dark:text-gray-300 mt-2">${work.description}</p><div class="mt-4 flex flex-wrap gap-2">${tagsList}</div><div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 bg-black/70"><a href="${work.projectLink || '#'}" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-2 px-6 rounded-lg transition-all">View Project</a></div></div>`;
+                worksGrid.appendChild(workDiv);
+            });
+        } catch (error) { console.error("Failed to fetch works data:", error); }
+    }
+
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const formSuccess = document.getElementById('form-success');
+        const formError = document.getElementById('form-error');
+        submitButton.disabled = true;
+        submitButton.innerText = 'Sending...';
+        try {
+          const response = await fetch(contactForm.action, { method: 'POST', body: new FormData(contactForm), headers: {'Accept': 'application/json'} });
+          if (response.ok) {
+            formSuccess.classList.remove('hidden');
+            formError.classList.add('hidden');
+            contactForm.reset();
+          } else { throw new Error('Form submission failed'); }
+        } catch (error) {
+          formError.classList.remove('hidden');
+          formSuccess.classList.add('hidden');
+        } finally {
+          submitButton.disabled = false;
+          submitButton.innerText = 'Send Message';
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchProfileData();
+        fetchSkillsData();
+        fetchExperienceData();
+        fetchEmploymentData();
+        fetchWorksData();
+    });
+
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    if(themeToggleBtn){
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+        themeToggleBtn.addEventListener('click', function() {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+            document.documentElement.classList.toggle('dark');
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.setItem('color-theme', 'dark');
+            } else {
+                localStorage.setItem('color-theme', 'light');
+            }
+        });
+    }
+
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+
+    document.querySelectorAll('.nav-link').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href.startsWith('#')) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+              window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+              mobileMenu.classList.add('hidden');
+            }
+        }
+      });
+    });
+
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+        let current = 'home';
+        sections.forEach(section => {
+            if (pageYOffset >= (section.offsetTop - 300)) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('active-section');
+            const linkHref = link.getAttribute('href');
+            if (linkHref && linkHref.includes(current)) {
+                link.classList.add('active-section');
+            }
+        });
+    });
+  </script>
+</body>
+</html>
